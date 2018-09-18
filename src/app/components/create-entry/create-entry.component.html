@@ -1,3 +1,41 @@
-<p>
-  create-entry works!
-</p>
+<div class="form">
+    <form class="form-container" name="createEntryForm" [formGroup]="createEntryForm">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Name" 
+            required
+            [(ngModel)]="createEntry.name"
+            [formControl]="nameFormControl">
+          <mat-error *ngIf="nameFormControl.invalid">{{getRequiredErrorMessage('name')}}</mat-error>        
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Phone" 
+            required
+            [(ngModel)]="createEntry.phone"
+            [formControl]="phoneFormControl">
+          <mat-error *ngIf="phoneFormControl.invalid">{{getPhoneErrorMessage()}}</mat-error>        
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Job Title" 
+            required
+            [(ngModel)]="createEntry.jobtitle"
+            [formControl]="jobtitleFormControl">
+          <mat-error *ngIf="jobtitleFormControl.invalid">{{getRequiredErrorMessage('jobtitle')}}</mat-error>        
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Company" 
+            required
+            [(ngModel)]="createEntry.company"
+            [formControl]="companyFormControl">
+          <mat-error *ngIf="companyFormControl.invalid">{{getRequiredErrorMessage('company')}}</mat-error>        
+        </mat-form-field>
+        <div class="button-container">
+          <button mat-raised-button color="primary"
+          class="submit-button"
+          (click)="gotoDashboard()">Dashboard</button>
+          <button mat-raised-button color="primary"
+          class="submit-button"
+          [disabled]="createEntryForm.invalid"
+          (click)="submit()">Submit</button>
+        </div>
+    </form>
+  </div>
