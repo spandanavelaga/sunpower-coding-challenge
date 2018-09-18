@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  oldUserData: any = [];
+  displayedColumns: string[] = ['name', 'phone', 'jobtitle', 'company'];
+  dataSource = new MatTableDataSource();
+
   constructor(
     private router: Router
   ) { }
@@ -14,6 +19,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Routes to Create Entry Component
   gotoCreateEntry() {
     this.router.navigate(['/createEntry']);
   }
