@@ -6,19 +6,24 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 
+import { MatToolbarModule, MatButtonModule } from '@angular/material';
+
 // Components Imports
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CreateEntryComponent } from './components/create-entry/create-entry.component';
 
 const appRoutes: Routes = [
   { path: '',redirectTo: '/dashboard',pathMatch: 'full'},
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'createEntry', component: CreateEntryComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    CreateEntryComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -27,6 +32,8 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     LayoutModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
