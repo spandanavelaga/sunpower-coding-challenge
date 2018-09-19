@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,11 +11,20 @@ import { MatTableDataSource } from '@angular/material';
 export class DashboardComponent implements OnInit {
   oldUserData: any = [];
   displayedColumns: string[] = ['name', 'phone', 'jobtitle', 'company'];
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource(this.oldUserData);
 
   constructor(
-    private router: Router
-  ) { }
+    private router : Router,
+    private storageService: StorageService) {
+      this.storageService.getData('userData')
+    .then((data)=> {
+      if(!data) {
+        this.oldUserData = [];
+      }else {
+        this.oldUserData = data;
+      }
+    });
+  }
 
   ngOnInit() {
   }

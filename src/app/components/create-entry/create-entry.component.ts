@@ -23,9 +23,11 @@ export class CreateEntryComponent implements OnInit {
     Validators.required,
     Validators.pattern(/(\(?[0-9]{3}\)?-?\s?[0-9]{3}-?[0-9]{4})/)
   ]);
-
+  oldUserData : any = [];
+  
   constructor(
     public fb: FormBuilder,
+    private storageService: StorageService,
     private router: Router
   ) {
     this.createEntryForm = fb.group({
@@ -33,6 +35,14 @@ export class CreateEntryComponent implements OnInit {
       jobtitle: this.jobtitleFormControl,
       company: this.companyFormControl,
       phone: this.phoneFormControl
+    });
+    this.storageService.getData('userData')
+    .then((data)=> {
+      if(!data) {
+        this.oldUserData = [];
+      }else {
+        this.oldUserData = data;
+      }
     });
   }
 
@@ -53,8 +63,9 @@ export class CreateEntryComponent implements OnInit {
   }
 
   submit() {
+    this.oldUserData.push(this.createEntry);
+    this.storageService.setData('userData', this.oldUserData);
+    this.gotoDashboard();
   }
 
-  resetForm() {
-  }
 }
