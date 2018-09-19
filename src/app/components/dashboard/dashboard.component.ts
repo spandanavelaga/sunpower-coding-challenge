@@ -16,12 +16,15 @@ export class DashboardComponent implements OnInit {
   constructor(
     private router : Router,
     private storageService: StorageService) {
-      this.storageService.getData('userData')
+
+    this.storageService.getData('userData')
     .then((data)=> {
       if(!data) {
         this.oldUserData = [];
+        this.dataSource = new MatTableDataSource(this.oldUserData);
       }else {
         this.oldUserData = data;
+        this.dataSource = new MatTableDataSource(this.oldUserData);
       }
     });
   }
@@ -32,5 +35,9 @@ export class DashboardComponent implements OnInit {
   // Routes to Create Entry Component
   gotoCreateEntry() {
     this.router.navigate(['/createEntry']);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

@@ -4,7 +4,10 @@
 
 <h1 *ngIf="oldUserData.length <= 0">No users found</h1>
 <div *ngIf="oldUserData.length > 0">
-  <table  mat-table [dataSource]="oldUserData" class="mat-elevation-z8">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
